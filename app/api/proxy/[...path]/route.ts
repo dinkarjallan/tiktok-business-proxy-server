@@ -16,10 +16,13 @@ export async function GET(
     
     console.log(`Proxying GET request to: ${targetUrl}`);
     
-    // Forward all original headers
+    // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      headers[key] = value;
+      // Skip headers that could reveal this is a proxy
+      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+        headers[key] = value;
+      }
     });
     
     const response = await axios.get(targetUrl, {
@@ -68,10 +71,13 @@ export async function POST(
     console.log(`Proxying POST request to: ${targetUrl}`);
     console.log('Request body:', body);
     
-    // Forward all original headers
+    // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      headers[key] = value;
+      // Skip headers that could reveal this is a proxy
+      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+        headers[key] = value;
+      }
     });
     
     const response = await axios.post(targetUrl, body, {
@@ -119,10 +125,13 @@ export async function PUT(
     
     console.log(`Proxying PUT request to: ${targetUrl}`);
     
-    // Forward all original headers
+    // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      headers[key] = value;
+      // Skip headers that could reveal this is a proxy
+      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+        headers[key] = value;
+      }
     });
     
     const response = await axios.put(targetUrl, body, {
@@ -169,10 +178,13 @@ export async function DELETE(
     
     console.log(`Proxying DELETE request to: ${targetUrl}`);
     
-    // Forward all original headers
+    // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      headers[key] = value;
+      // Skip headers that could reveal this is a proxy
+      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+        headers[key] = value;
+      }
     });
     
     const response = await axios.delete(targetUrl, {
