@@ -25,6 +25,9 @@ export async function GET(
       }
     });
     
+    // Set a proper host header that TikTok's API will accept
+    headers['host'] = 'business-api.tiktok.com';
+    
     const response = await axios.get(targetUrl, {
       headers,
       timeout: 30000,
@@ -80,6 +83,9 @@ export async function POST(
       }
     });
     
+    // Set a proper host header that TikTok's API will accept
+    headers['host'] = 'business-api.tiktok.com';
+    
     const response = await axios.post(targetUrl, body, {
       headers,
       timeout: 30000,
@@ -134,6 +140,9 @@ export async function PUT(
       }
     });
     
+    // Set a proper host header that TikTok's API will accept
+    headers['host'] = 'business-api.tiktok.com';
+    
     const response = await axios.put(targetUrl, body, {
       headers,
       timeout: 30000,
@@ -186,6 +195,9 @@ export async function DELETE(
         headers[key] = value;
       }
     });
+    
+    // Set a proper host header that TikTok's API will accept
+    headers['host'] = 'business-api.tiktok.com';
     
     const response = await axios.delete(targetUrl, {
       headers,
