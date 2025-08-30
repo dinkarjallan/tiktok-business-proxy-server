@@ -16,13 +16,14 @@ export async function GET(
     
     console.log(`Proxying GET request to: ${targetUrl}`);
     
+    // Forward all original headers
+    const headers: Record<string, string> = {};
+    request.headers.forEach((value, key) => {
+      headers[key] = value;
+    });
+    
     const response = await axios.get(targetUrl, {
-      headers: {
-        'User-Agent': request.headers.get('user-agent') || 'TikTok-Business-Proxy/1.0',
-        'Accept': request.headers.get('accept') || 'application/json',
-        'Accept-Language': request.headers.get('accept-language') || 'en-US,en;q=0.9',
-        'Cache-Control': 'no-cache',
-      },
+      headers,
       timeout: 30000,
     });
 
@@ -67,14 +68,14 @@ export async function POST(
     console.log(`Proxying POST request to: ${targetUrl}`);
     console.log('Request body:', body);
     
+    // Forward all original headers
+    const headers: Record<string, string> = {};
+    request.headers.forEach((value, key) => {
+      headers[key] = value;
+    });
+    
     const response = await axios.post(targetUrl, body, {
-      headers: {
-        'User-Agent': request.headers.get('user-agent') || 'TikTok-Business-Proxy/1.0',
-        'Accept': request.headers.get('accept') || 'application/json',
-        'Accept-Language': request.headers.get('accept-language') || 'en-US,en;q=0.9',
-        'Content-Type': request.headers.get('content-type') || 'application/json',
-        'Cache-Control': 'no-cache',
-      },
+      headers,
       timeout: 30000,
     });
 
@@ -118,14 +119,14 @@ export async function PUT(
     
     console.log(`Proxying PUT request to: ${targetUrl}`);
     
+    // Forward all original headers
+    const headers: Record<string, string> = {};
+    request.headers.forEach((value, key) => {
+      headers[key] = value;
+    });
+    
     const response = await axios.put(targetUrl, body, {
-      headers: {
-        'User-Agent': request.headers.get('user-agent') || 'TikTok-Business-Proxy/1.0',
-        'Accept': request.headers.get('accept') || 'application/json',
-        'Accept-Language': request.headers.get('accept-language') || 'en-US,en;q=0.9',
-        'Content-Type': request.headers.get('content-type') || 'application/json',
-        'Cache-Control': 'no-cache',
-      },
+      headers,
       timeout: 30000,
     });
 
@@ -168,13 +169,14 @@ export async function DELETE(
     
     console.log(`Proxying DELETE request to: ${targetUrl}`);
     
+    // Forward all original headers
+    const headers: Record<string, string> = {};
+    request.headers.forEach((value, key) => {
+      headers[key] = value;
+    });
+    
     const response = await axios.delete(targetUrl, {
-      headers: {
-        'User-Agent': request.headers.get('user-agent') || 'TikTok-Business-Proxy/1.0',
-        'Accept': request.headers.get('accept') || 'application/json',
-        'Accept-Language': request.headers.get('accept-language') || 'en-US,en;q=0.9',
-        'Cache-Control': 'no-cache',
-      },
+      headers,
       timeout: 30000,
     });
 
