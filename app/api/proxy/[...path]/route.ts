@@ -19,8 +19,8 @@ export async function GET(
     // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      // Skip headers that could reveal this is a proxy
-      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+      // Only skip the most problematic proxy headers, preserve others
+      if (!['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
         headers[key] = value;
       }
     });
@@ -50,7 +50,7 @@ export async function GET(
     }
     
     return NextResponse.json(
-      { error: 'Internal Server Error', message: error.message },
+      { error: 'Proxy Error', message: error.message },
       { status: 500 }
     );
   }
@@ -74,8 +74,8 @@ export async function POST(
     // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      // Skip headers that could reveal this is a proxy
-      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+      // Only skip the most problematic proxy headers, preserve others
+      if (!['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
         headers[key] = value;
       }
     });
@@ -128,8 +128,8 @@ export async function PUT(
     // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      // Skip headers that could reveal this is a proxy
-      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+      // Only skip the most problematic proxy headers, preserve others
+      if (!['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
         headers[key] = value;
       }
     });
@@ -181,8 +181,8 @@ export async function DELETE(
     // Forward all original headers but exclude proxy-revealing ones
     const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      // Skip headers that could reveal this is a proxy
-      if (!['host', 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
+      // Only skip the most problematic proxy headers, preserve others
+      if (!['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-real-ip'].includes(key.toLowerCase())) {
         headers[key] = value;
       }
     });
